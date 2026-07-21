@@ -32,9 +32,22 @@
     </properties>
 
     <dependencies>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.openapitools</groupId>
+            <artifactId>jackson-databind-nullable</artifactId>
+            <version>0.2.10</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>3.0.3</version>
         </dependency>
 
         <dependency>
@@ -42,14 +55,43 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
     <build>
-      <plugins>
-       <plugin>
-           <groupId>org.springframework.boot</groupId>
-          <artifactId>spring-boot-maven-plugin</artifactId>
-          </plugin>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>7.23.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>${project.basedir}/src/main/resources/rest/openapi.yaml</inputSpec>
+                            <output>${project.build.directory}/generated/openapi</output>
+                            <generatorName>spring</generatorName>
+                            <apiPackage>com.altiacompany.pricing.infrastructure.adapter.input.rest.api</apiPackage>
+                            <modelPackage>com.altiacompany.pricing.infrastructure.adapter.input.rest.dto</modelPackage>
+                            <invokerPackage>com.altiacompany.pricing.infrastructure.adapter.input.rest</invokerPackage>
+                            <supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>
+                            <configOptions>
+                                <interfaceOnly>true</interfaceOnly>
+                                <useSpringBoot4>true</useSpringBoot4>
+                                <useJakartaEe>true</useJakartaEe>
+                                <skipDefaultInterface>true</skipDefaultInterface>
+                                <useTags>true</useTags>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
