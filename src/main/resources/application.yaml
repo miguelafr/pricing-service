@@ -20,3 +20,17 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: alpha
+    tagsSorter: alpha
+
+info:
+  app:
+    name: Pricing Service
+    description: API for retrieving the applicable product price based on product ID, brand ID, and application date.
+    version: '@project.version@'
