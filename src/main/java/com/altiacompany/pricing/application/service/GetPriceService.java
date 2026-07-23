@@ -26,6 +26,18 @@ public class GetPriceService implements GetPriceUseCase {
 
     @Override
     public Price getApplicablePrice(GetPriceQuery query) {
+        /*
+         * The final selection of the applicable price is intentionally
+         * performed by the domain layer to keep the business rule independent
+         * from the persistence layer. This helps ensure that future changes to
+         * the price selection rules remain isolated within the domain layer.
+         *
+         * However, this design assumes a very small number of overlapping
+         * prices. If that assumption no longer holds, the persistence adapter
+         * may optimize the query (e.g. ORDER BY priority DESC LIMIT 1) while
+         * preserving the same repository contract and observable business
+         * behaviour.
+         */
         List<Price> prices =
                 priceRepository.findByApplicationDateAndProductIdAndBrandId(
                         query.getApplicationDate(), query.getProductId(),
