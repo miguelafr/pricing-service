@@ -20,6 +20,25 @@ class PriceSelectorTest {
     private final PriceSelector priceSelector = new PriceSelector();
 
     @Test
+    void shouldReturnPriceWhenSinglePriceActive() {
+        // Given
+        Instant date = Instant.parse("2020-06-14T10:00:00Z");
+        Long productId = 35455L;
+        Long brandId = 1L;
+
+        Price singlePrice = new Price(brandId, date, date.plusSeconds(3600), 1L,
+                productId, 0, BigDecimal.valueOf(35.50), "EUR");
+
+        List<Price> prices = Collections.singletonList(singlePrice);
+
+        // When
+        Optional<Price> result = priceSelector.selectApplicablePrice(prices);
+
+        // Then
+        assertThat(result).hasValue(singlePrice);
+    }
+
+    @Test
     void shouldReturnPriceWithHighestPriorityWhenMultiplePricesActive() {
         // Given
         Instant date = Instant.parse("2020-06-14T10:00:00Z");
