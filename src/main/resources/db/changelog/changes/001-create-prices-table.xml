@@ -18,8 +18,12 @@
                 PRICE DECIMAL(10, 2) NOT NULL,
                 CURR CHAR(3) NOT NULL
             );
+
+            CREATE INDEX idx_prices_product_brand_dates ON prices (PRODUCT_ID, BRAND_ID, START_DATE, END_DATE);
         </sql>
         <rollback>
+            DROP INDEX idx_prices_product_brand_dates;
+
             DROP TABLE PRICES;
         </rollback>
     </changeSet>
