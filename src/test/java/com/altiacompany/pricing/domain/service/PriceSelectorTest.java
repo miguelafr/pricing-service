@@ -39,9 +39,7 @@ class PriceSelectorTest {
         Optional<Price> result = priceSelector.selectApplicablePrice(prices);
 
         // Then
-        assertThat(result).isPresent();
-        assertThat(result.get().getPriceList()).isEqualTo(2L);
-        assertThat(result.get().getAmount()).isEqualByComparingTo("25.45");
+        assertThat(result).hasValue(highPriorityPrice);
     }
 
     @Test
