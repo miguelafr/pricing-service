@@ -21,8 +21,6 @@ class SpringDataPriceRepositoryTest {
 
     private PriceEntity price1;
     private PriceEntity price2;
-    private PriceEntity price3;
-    private PriceEntity price4;
 
     @BeforeEach
     void setUp() {
@@ -39,18 +37,6 @@ class SpringDataPriceRepositoryTest {
                 new PriceEntity(null, 1L, Instant.parse("2020-06-14T15:00:00Z"),
                         Instant.parse("2020-06-14T18:30:00Z"), 2L, 35455L, 1,
                         BigDecimal.valueOf(25.45), "EUR"));
-
-        // 3. PriceList 3: Priority 1, Price 30.50
-        price3 = repository.save(
-                new PriceEntity(null, 1L, Instant.parse("2020-06-15T00:00:00Z"),
-                        Instant.parse("2020-06-15T11:00:00Z"), 3L, 35455L, 1,
-                        BigDecimal.valueOf(30.50), "EUR"));
-
-        // 4. PriceList 4: Priority 1, Price 38.95
-        price4 = repository.save(
-                new PriceEntity(null, 1L, Instant.parse("2020-06-15T16:00:00Z"),
-                        Instant.parse("2020-12-31T23:59:59Z"), 4L, 35455L, 1,
-                        BigDecimal.valueOf(38.95), "EUR"));
     }
 
     @Test
